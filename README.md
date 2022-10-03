@@ -12,6 +12,8 @@
 
 <h3>How install:</h3>
 
+ - Go to <a href="https://github.com/MarcsVinicius/vrpex-fivem-mrcs-air-suspension/releases">releases.</a>
+ - Download the file.
  - install the dependencies.
  - ensure vrpex-fivem-mrcs-air-suspension in your <strong>resources.cfg</strong>.
  <h3>How use:</h3>
