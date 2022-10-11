@@ -45,7 +45,6 @@ AddEventHandler("suspension:opennui", function(source)
     sourcePlayer = source
     if onNui then
         SetNuiFocus(true, true)
-        print(neonStatus)
         SendNUIMessage({
             show = true,
             suspValue = GetVehicleSuspensionHeight(syncedVeh, susp),
@@ -131,6 +130,16 @@ RegisterNUICallback("setNeonOff", function()
 end
 )
 
+RegisterNUICallback("setEngineOn", function()
+    SetVehicleEngineOn(syncVehicle["vehId"], true, true, false )
+end
+)
+
+RegisterNUICallback("setEngineOff", function()
+    SetVehicleEngineOn(syncVehicle["vehId"], false, false, true )
+end
+)
+
 AddEventHandler("suspension:deleteVehSync", function()
     if (syncVehicle["vehId"] == 0) then
         TriggerEvent("Notify", "vermelho", "Nenhum veículo sicronizado encontrado!", 5000) 
@@ -140,11 +149,15 @@ AddEventHandler("suspension:deleteVehSync", function()
         syncVehicle["neon"] = false
         syncVehicle["xenon"] = false
         TriggerEvent("Notify", "verde", "Controle desincronizado com sucesso!", 5000)
+        SendNUIMessage({
+            show = false
+        })
+            onNui = false
+        SetNuiFocus(false, false)
     end
 end)
 
-TriggerEvent('chat:addSuggestion', '/desincronizar', 'Comando para desincronizar seu controle do carro')
-RegisterCommand('desincronizar', function(source, args, rawCommand)
+RegisterNUICallback('desyncVehicle', function(source, args, rawCommand)
     TriggerEvent("suspension:deleteVehSync")
 end
 )
