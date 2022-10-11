@@ -13,5 +13,6 @@ server_scripts {
 }
 
 files {
-    "index.html"
+    "index.html",
+	"style.css"
 }
